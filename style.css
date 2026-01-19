@@ -1,0 +1,121 @@
+/* css file for styling*/ 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f9f9f9;
+  color: #222;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+header {
+  margin-bottom: 20px;
+}
+
+header h1 {
+  font-size: 2.5em;
+  color: #4a3aff;
+  user-select: none;
+  text-align: center;
+}
+
+main {
+  display: flex;
+  gap: 20px;
+  max-width: 900px;
+  width: 100%;
+}
+
+section {
+  background: white;
+  box-shadow: 0 6px 12px rgba(80, 70, 230, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  flex: 1;
+  height: 480px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+h2 {
+  margin-bottom: 15px;
+  color: #4a3aff;
+  font-weight: 600;
+}
+
+#memberList div,
+#taskList div {
+  background: #d6d6ff;
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #312e81;
+  cursor: default;
+  transition: background-color 0.2s ease;
+}
+
+#memberList div:hover,
+#taskList div:hover {
+  background: #b8b8ff;
+}
+
+button {
+  margin-top: auto;
+  padding: 10px 15px;
+  background-color: #4a3aff;
+  color: white;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(74, 58, 255, 0.5);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  background-color: #3f33d4;
+  box-shadow: 0 5px 10px rgba(63, 51, 212, 0.6);
+}
+
+button:active {
+  background-color: #3729ad;
+  box-shadow: 0 2px 5px rgba(55, 41, 173, 0.7);
+}
+
+section::-webkit-scrollbar {
+  width: 7px;
+}
+
+section::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+section::-webkit-scrollbar-thumb {
+  background: #aaaaff;
+  border-radius: 10px;
+}
+
+section::-webkit-scrollbar-thumb:hover {
+  background: #8888ff;
+}
+
+@media (max-width: 720px) {
+  main {
+    flex-direction: column;
+  }
+
+  section {
+    height: 300px;
+  }
+}
