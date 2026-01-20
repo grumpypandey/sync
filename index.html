@@ -1,34 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Sync</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1 id="projectName">Sync</h1>
-  </header>
 
-  <main>
-    <section id="members">
-      <h2>Members</h2>
-      <div id="memberList"></div>
-      <button id="addMemberBtn">+ Add Member</button>
-    </section>
+  <h1>sync</h1>
+  <p class="sub">group project thingy</p>
 
-    <section id="tasks">
-      <h2>Tasks</h2>
-      <div id="taskList"></div>
-      <button id="addTaskBtn">+ Add Task</button>
-    </section>
-  </main>
+  <div class="box">
+    <input id="taskInput" placeholder="task name">
+    <input id="memberInput" placeholder="assign to">
+    <select id="statusInput">
+      <option value="todo">todo</option>
+      <option value="doing">doing</option>
+      <option value="done">done</option>
+    </select>
+    <button onclick="addTask()">add</button>
+  </div>
 
-  <script src="state.js"></script>
+  <div id="taskList"></div>
+
   <script src="logic.js"></script>
 </body>
 </html>
-
-  
 
 
