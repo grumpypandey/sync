@@ -67,51 +67,112 @@
 
 
 
-let tasks = []
-
-function addTask() {
-  let name = document.getElementById("taskInput").value
-  let member = document.getElementById("memberInput").value
-  let status = document.getElementById("statusInput").value
-
-  if (name.trim() === "") return
-
-  tasks.push({
-    name: name,
-    member: member || "someone",
-    status: status
-  })
-
-  document.getElementById("taskInput").value = ""
-  document.getElementById("memberInput").value = ""
-
-  render()
+function qs(id) {
+  return document.getElementById(id)
 }
 
-function render() {
-  let list = document.getElementById("taskList")
-  list.innerHTML = ""
+function formatTime(t) {
+  let d = new Date(t)
+  return d.toLocaleString()
+}
 
-  tasks.forEach((t, i) => {
+/* landing */
+function initLanding() {
+  let list = qs("recent")
+  if (!list) return
+
+  let projects = loadProjects().slice(-3).reverse()
+  projects.forEach(p => {
     let div = document.createElement("div")
-    div.className = "task " + t.status
-
-    div.innerHTML = `
-      <strong>${t.name}</strong>
-      <span>assigned to: ${t.member}</span>
-      <span>status: ${t.status}</span>
-    `
-
-    div.onclick = () => cycleStatus(i)
-
+    div.className = "row"
+    div.innerText = p.title
     list.appendChild(div)
   })
 }
 
-function cycleStatus(i) {
-  if (tasks[i].status === "todo") tasks[i].status = "doing"
-  else if (tasks[i].status === "doing") tasks[i].status = "done"
-  else tasks[i].status = "todo"
+/* create project */
+function handleCreateProject() {
+  let title = qs("title").value.trim()
+  let desc = qs("desc").value.trim()
+  let members = qs("members").value.split(",").map(m => m.trim())
+  let deadline = qs("deadline").value
 
-  render()
+  if (!title) return alert("title missing")
+
+  createProject(title, desc, members, deadline)
+  window.location.href = "projects.html"
+}
+
+/* list projects */
+function renderProjects() {
+  let wrap = qs("projects")
+  if (!wrap) return
+
+  let projects = loadProjects()
+  projects.forEach(p => {
+    let row = document.createElement("div")
+    row.className = "row clickable"
+    row.innerText = p.title
+    row.onclick = () => {
+      window.location.href = "project.html?id=" + p.id
+    }
+    wrap.appendChild(row)
+  })
+}
+
+/* single project */
+function renderProject() {
+  let params = new URLSearchParams(window.location.search)
+  let id = params.get("id")
+  if (!id) return
+
+  let project = getProjectById(id)
+  if (!project) return
+
+  qs("ptitle").innerText = project.title
+  qs("pdesc").innerText = project.desc
+  qs("pmembers").innerText = project.members.join(", ")
+
+  let tasks = qs("tasks")
+  project.tasks.forEach(t => {
+    let div = document.createElement("div")
+    div.className = "row"
+    div.innerText = t.title + " → " + (t.assignedTo || "unassigned")
+    tasks.appendChild(div)
+  })
+
+  let logs = qs("logs")
+  project.logs.slice().reverse().forEach(l => {
+    let div = document.createElement("div")
+    div.className = "log"
+    div.innerText = "[" + formatTime(l.time) + "] " + l.text
+    logs.appendChild(div)
+  })
+}
+
+/* add task */
+function addTask() {
+  let params = new URLSearchParams(window.location.search)
+  let id = params.get("id")
+  let project = getProjectById(id)
+
+  let title = qs("tasktitle").value.trim()
+  let assigned = qs("assign").value.trim()
+
+  if (!title) return
+
+  project.tasks.push({
+    id: Date.now().toString(),
+    title: title,
+    assignedTo: assigned || null,
+    status: "open"
+  })
+
+  project.logs.push({
+    text: "task added: " + title,
+    time: Date.now()
+  })
+
+  updateProject(project)
+  location.reload()
 }

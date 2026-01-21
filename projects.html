@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>projects</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body onload="renderProjects()">
+
+<h1>projects</h1>
+
+<div id="Projects"></div>
+
+<h2>new project</h2>
+<input id="title" placeholder="Title">
+<textarea id="desc" placeholder="Description"></textarea>
+<input id="members" placeholder="members (comma separated)">
+<input id="deadline" type="date">
+<br><br>
+<button onclick="handleCreateProject()">create</button>
+
+<script src="state.js"></script>
+<script src="logic.js"></script>
+</body>
+</html>

@@ -1,30 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Sync</title>
+  <title>sync</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body onload="initLanding()">
 
-  <h1>sync</h1>
-  <p class="sub">group project thingy</p>
+<h1>sync</h1>
+<p>group coordination tool</p>
 
-  <div class="box">
-    <input id="taskInput" placeholder="task name">
-    <input id="memberInput" placeholder="assign to">
-    <select id="statusInput">
-      <option value="todo">todo</option>
-      <option value="doing">doing</option>
-      <option value="done">done</option>
-    </select>
-    <button onclick="addTask()">add</button>
-  </div>
+<button onclick="location.href='projects.html'">view projects</button>
+<button onclick="location.href='projects.html#new'">new project</button>
 
-  <div id="taskList"></div>
+<h2>recent activity</h2>
+<div id="recent"></div>
 
-  <script src="logic.js"></script>
+<script src="state.js"></script>
+<script src="logic.js"></script>
 </body>
 </html>
-
-

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>project</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body onload="renderProject()">
+
+<button onclick="history.back()">← back</button>
+
+<h1 id="ptitle"></h1>
+<p id="pdesc"></p>
+
+<h2>members</h2>
+<div id="pmembers"></div>
+
+<h2>tasks</h2>
+<div id="tasks"></div>
+
+<input id="tasktitle" placeholder="new task">
+<input id="assign" placeholder="assign to">
+<button onclick="addTask()">add</button>
+
+<h2>activity</h2>
+<div id="logs"></div>
+
+<script src="state.js"></script>
+<script src="logic.js"></script>
+</body>
+</html>
